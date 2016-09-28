@@ -1,0 +1,2 @@
+export QUERY_STRING="mode=file&file=ioncube/tax.php" ; \
+php -e -r 'parse_str($_SERVER["QUERY_STRING"], $_GET); include "Ionic.php";'
