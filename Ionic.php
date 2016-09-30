@@ -135,19 +135,19 @@ class SmithWatermanMatchMismatch
 
 //JSON return functions
 
-function statusSuccess(string $message = "none") {
+function statusSuccess(string $message) {
 	return sprintf("{status: \"success\", message: \"%s\"}", $message);
 }
 
-function statusSuccessInsert(string $message = "none", string $docId = 0) {
+function statusSuccessInsert(string $message, string $docId) {
 	return sprintf("{status: \"success\", message: \"%s\", docId: \"%s\"}", $message, $docId);
 }
 
-function statusFail(string $message = "none") {
+function statusFail(string $message) {
 	return sprintf("{status: \"fail\", message: \"%s\"}", $message);
 }
 
-function statusTimeout(string $message = "none") {
+function statusTimeout(string $message) {
 	return sprintf("{status: \"timeout\", message: \"%s\"}", $message);
 }
 
