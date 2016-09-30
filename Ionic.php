@@ -172,7 +172,7 @@ else {
 }
 
 $found = FALSE;
-echo("test");
+
 foreach ($conn->listDatabases() as $db_info) {
 	if ($db_info->getName() == $db_name) {
 		$found = TRUE;
