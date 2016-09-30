@@ -1,4 +1,4 @@
-<?php header('Content-Type: application/json', true, 200);
+<?php header('Content-Type: application/json');
 
 /*
 Ionic Scanner - Scan and validates IonCube Loader encoded files.
