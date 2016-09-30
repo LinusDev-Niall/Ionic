@@ -19,10 +19,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-$err_inv_arg_mrec = "IC011 - Invalid argument, maxRecur must be > 0 but was %s";
+$err_inv_arg_mrec = "IC011 - Invalid argument, maxRecur must be a number > 5 and less than 1000 but was %s";
 $err_inv_arg_mode = "IC012 - Invalid argument, no mode specified.";
 $err_inv_arg_str = "IC013 - Invalid argument, input string must be between 20 and 2000 carachters, was %s.";
 $err_inv_arg_fp = "IC014 - Invalid argument, invalid path specified.";
+$err_inv_arg_str = "IC015 - Invalid argument, string must be supplied when in string mode.";
 $err_file_no_acc = "IC021 - Could not access the specified file: %s";
 $err_not_ion_file = "IC031 - File does not appear to be an IonCube file.";
 $err_match_timeout = "IC041 - Timeout was reached while processing database entries.";

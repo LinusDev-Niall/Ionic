@@ -1,4 +1,4 @@
-<?php header('Content-Type: application/json', true, 202);
+<?php header('Content-Type: application/json', true, 200);
 
 /*
 Ionic Scanner - Scan and validates IonCube Loader encoded files.
@@ -133,8 +133,14 @@ class SmithWatermanMatchMismatch
 	}
 }
 
+//JSON return functions
+
 function statusSuccess(string $message = "none") {
 	return sprintf("{status: \"success\", message: \"%s\"}", $message);
+}
+
+function statusSuccessInsert(string $message = "none", string $docId = 0) {
+	return sprintf("{status: \"success\", message: \"%s\", docId: \"%s\"}", $message, $docId);
 }
 
 function statusFail(string $message = "none") {
@@ -145,6 +151,7 @@ function statusTimeout(string $message = "none") {
 	return sprintf("{status: \"timeout\", message: \"%s\"}", $message);
 }
 
+//Establish DB connection
 
 if ($use_ssl) {
 	if (!preg_match("/\?ssl=true/", $mongo_server)) {
@@ -165,14 +172,13 @@ else {
 }
 
 $found = FALSE;
-
+echo("test");
 foreach ($conn->listDatabases() as $db_info) {
 	if ($db_info->getName() == $db_name) {
 		$found = TRUE;
 		break;
 	}
 }
-
 if (!$found) die(statusFail($err_db_name_invalid));
 
 $db = $conn->$db_name;
@@ -184,27 +190,31 @@ foreach ($db->listCollections() as $coll_info) {
 		break;
 	}
 }
-
 if (!$found) die(statusFail($err_coll_name_invalid));
 
 $coll = $db->$coll_name;
 
 if ($coll->count() == 0) die(statusFail($err_db_not_seeded));
 
-
+//Basic argument validation
 
 if (isset($_GET['mode'])) $mode = $_GET['mode']; else $mode = $default_mode;
-if (isset($_GET['string'])) $left = $_GET['string'];
-if (isset($_GET['file'])) $filePath = $_GET['file'];
-if (isset($_GET['maxRecur'])) $maxRecur = $_GET['maxRecur']; else $maxRecur = 100;
-
 if ($mode != 'string' && $mode != 'file') die(statusFail($err_inv_arg_mode));
-if ($maxRecur < 1) {
+
+if (isset($_GET['string'])) $string = $_GET['string'];
+if (isset($_GET['file'])) $filePath = $_GET['file'];
+
+
+if (isset($_GET['maxRecur'])) $maxRecur = $_GET['maxRecur']; else $maxRecur = $ion_match_max_recur;
+if (!is_numeric($maxRecur) || $maxRecur < 5 || $maxRecur > 1000)  {
 	die(statusFail(sprintf($err_inv_arg_mrec, escapeshellarg($maxRecur))));
 }
 
+//Set up the $left and $file variables
+
 if ($mode == 'string') {
-	if (isset($string) && (strlen($string) < $ion_bootstrap_min_length || strlen($string) > $ion_bootstrap_max_length)) {
+	if (isset($string)) $string = gzinflate(base64_decode($string)); else die(statusFail($err_inv_arg_str));
+	if (strlen($string) < $ion_bootstrap_min_length || strlen($string) > $ion_bootstrap_max_length) {
 		die(statusFail(sprintf($err_inv_arg_str, strlen($string))));
 	}
 	$left = $string;
@@ -219,6 +229,8 @@ else {
 	$left = $file[1];
 	if (strlen($left) > $ion_bootstrap_max_length) statusFail($err_not_ion_file);
 }
+
+//Analyse the bootsrapper
 
 $search = array('md5' => md5($left));
 
@@ -236,7 +248,8 @@ else {
 		$counter++;
 		
 		if ($sim > $ion_sim_threshold) {
-			$coll->insertOne(array('md5' => md5($left), 'text' => base64_encode($left), 'sim' => $sim, 'created' => time()));
+			$result = $coll->insertOne(array('md5' => md5($left), 'text' => base64_encode($left), 'sim' => $sim, 'created' => time()));
+			$newDocId = $result->getInsertedId();
 			break;
 		}
 		else {
@@ -245,7 +258,9 @@ else {
 	}
 }
 
-if (isset($file[2])) {
+//Analyse the base64 encoded block
+
+if ($mode == 'file' && isset($file[2])) {
 	array_splice($file, 0, 2);
 	foreach ($file as $line) {
 		if (strlen($line) < 4) continue;
@@ -254,7 +269,11 @@ if (isset($file[2])) {
 			die(statusFail($msg_regex_bb_miss . $line));
 		}
 	}
-	die(statusSuccess($msg_valid_ioncube));
+	$data = isset($newDocId) ? statusSuccessInsert($msg_valid_ioncube, $new_doc_id) : statusSuccess($msg_valid_ioncube);
 }
-die(statusSuccess($msg_abrupt_f_end));
+else {
+	$data = isset($newDocId) ? statusSuccessInsert($msg_abrupt_f_end, $new_doc_id) : statusSuccess($msg_abrupt_f_end);
+}
+die($data);
+
 ?>
