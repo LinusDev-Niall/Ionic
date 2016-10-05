@@ -22,6 +22,7 @@ $mongo_server = 'mongodb://localhost/';
 $db_name = 'dev_db_php';
 $coll_name = 'dev_db_php';
 $default_mode = 'file';
+$db_can_seed = FALSE;
 
 
 $use_ssl = FALSE;
@@ -44,4 +45,3 @@ $ion_bootstrap_max_length = 2000;
 $ion_match_max_recur = 100;
 $ion_sim_threshold = 0.8;
 
-?>

@@ -1,5 +1,4 @@
 <?php if(!defined('IonicLoaded')) { header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404); }
-
 /*
 Ionic Scanner - Scan and validates IonCube Loader encoded files.
 Copyright (C) 2016  Niall Newman (niall.newman@btinternet.com)
@@ -31,11 +30,11 @@ $err_db_not_seeded = "IC051 - The configured database is not seeded.";
 $err_db_name_invalid = "IC052 - The configured database does not exist on the server.";
 $err_coll_name_invalid = "IC053 - The configured collection does not exist in the database.";
 
-
 $msg_no_template = "IC951 - Unable to find a matching template.";
 $msg_regex_bb_miss = "IC961 - Regex match missed on line: ";
 $msg_abrupt_f_end = "IC971 - End of the file was reached sooner than expected.";
 $msg_valid_ioncube = "IC001 - IonCube file validated.";
 
+$err_db_seed_disabled = "Database seeding has been disabled to prevent accidental seeding. You must enable seeding before running this script.";
 
-?>
+

@@ -36,7 +36,7 @@ class SmithWatermanGotoh
     private $gapValue;
     private $leftSubstitution;
 
-    /**
+    /*
      * Constructs a new Smith Waterman metric.
      *
      * @param gapValue
@@ -103,7 +103,7 @@ class SmithWatermanMatchMismatch
     private $matchValue;
     private $mismatchValue;
 
-    /**
+    /*
      * Constructs a new match-mismatch substitution function. When two
      * characters are equal a score of <code>matchValue</code> is assigned. In
      * case of a mismatch a score of <code>mismatchValue</code>. The
