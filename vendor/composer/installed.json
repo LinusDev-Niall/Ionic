@@ -1,34 +1,26 @@
 [
     {
         "name": "mongodb/mongodb",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
+        "version": "1.0.3",
+        "version_normalized": "1.0.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/mongodb/mongo-php-library.git",
-            "reference": "55e2a31d92a1ad6740dbf251d3e7b1ac07c503a3"
+            "reference": "3c742f3ceffc4dc67fee02dc6ebfc2e7cb403b7c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/mongodb/mongo-php-library/zipball/55e2a31d92a1ad6740dbf251d3e7b1ac07c503a3",
-            "reference": "55e2a31d92a1ad6740dbf251d3e7b1ac07c503a3",
+            "url": "https://api.github.com/repos/mongodb/mongo-php-library/zipball/3c742f3ceffc4dc67fee02dc6ebfc2e7cb403b7c",
+            "reference": "3c742f3ceffc4dc67fee02dc6ebfc2e7cb403b7c",
             "shasum": ""
         },
         "require": {
             "ext-mongodb": "^1.1.0",
             "php": ">=5.4"
         },
-        "require-dev": {
-            "phpunit/phpunit": "^4.8"
-        },
-        "time": "2016-09-28 22:45:39",
+        "time": "2016-09-23 19:38:29",
         "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.1.x-dev"
-            }
-        },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-4": {
                 "MongoDB\\": "src/"

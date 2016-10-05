@@ -4,36 +4,28 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "13dc06b511540794648a93a544c06f84",
-    "content-hash": "8cae36844a8b8347b8273847833835a7",
+    "hash": "ed30404138a99277d448635fb8437b2f",
+    "content-hash": "28d7527e577c78c7d2bb17a89ff89cd7",
     "packages": [
         {
             "name": "mongodb/mongodb",
-            "version": "dev-master",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mongodb/mongo-php-library.git",
-                "reference": "55e2a31d92a1ad6740dbf251d3e7b1ac07c503a3"
+                "reference": "3c742f3ceffc4dc67fee02dc6ebfc2e7cb403b7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mongodb/mongo-php-library/zipball/55e2a31d92a1ad6740dbf251d3e7b1ac07c503a3",
-                "reference": "55e2a31d92a1ad6740dbf251d3e7b1ac07c503a3",
+                "url": "https://api.github.com/repos/mongodb/mongo-php-library/zipball/3c742f3ceffc4dc67fee02dc6ebfc2e7cb403b7c",
+                "reference": "3c742f3ceffc4dc67fee02dc6ebfc2e7cb403b7c",
                 "shasum": ""
             },
             "require": {
                 "ext-mongodb": "^1.1.0",
                 "php": ">=5.4"
             },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8"
-            },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "MongoDB\\": "src/"
@@ -68,15 +60,13 @@
                 "mongodb",
                 "persistence"
             ],
-            "time": "2016-09-28 22:45:39"
+            "time": "2016-09-23 19:38:29"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "mongodb/mongodb": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
